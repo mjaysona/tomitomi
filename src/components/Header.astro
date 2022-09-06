@@ -4,17 +4,18 @@ import { SITE_TITLE } from '../config';
 
 <header>
   <h2>
-    {SITE_TITLE}
+    &lt;{SITE_TITLE}/&gt;
   </h2>
   <nav>
 		
   </nav>
 </header>
-<style>
-	header {
-		margin: 0em 0 2em;
-	}
-	h2 {
-		margin: 0.5em 0;
-	}
+<style lang="scss">
+  @import '../styles/variables.scss';
+
+  h2 {
+    color: $primary-color;
+    font-size: 2em;
+    font-weight: 700;
+  }
 </style>
