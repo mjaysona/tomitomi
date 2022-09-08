@@ -1,7 +1,20 @@
 ---
-const today = new Date();
+import Presence from './Presence.astro';
 ---
 
 <footer>
-	YOUR NAME HERE. All rights reserved.
+	<Presence />
+  <span>Powered by <a href="#">Astro</a></span>
 </footer>
+<style lang="scss">
+  @import '../styles/variables.scss';
+
+  footer {
+    align-items: center;
+    color: $gray-light;
+    display: flex;
+    height: 60px;
+    justify-content: space-between;
+    padding-top: 80px;
+  }
+</style>

@@ -1,21 +1,50 @@
 ---
 import { SITE_TITLE } from '../config';
+import Presence from './Presence.astro';
 ---
 
 <header>
   <h2>
-    &lt;{SITE_TITLE}/&gt;
+    <a href="/">&lt;{SITE_TITLE}/&gt;</a>
   </h2>
-  <nav>
-		
-  </nav>
+  <div>
+		<div class="header__nav">
+      <a href="/articles">Articles</a>
+      <a href="#">Development</a>
+      <a href="#">About me</a>
+    </div>
+    <Presence />
+  </div>
 </header>
 <style lang="scss">
   @import '../styles/variables.scss';
 
-  h2 {
-    color: $primary-color;
-    font-size: 2em;
-    font-weight: 700;
+  header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 48px;
+    h2 {
+      color: $primary-color;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    div {
+      display: flex;
+      .header__nav {
+        font-weight: 600;
+        margin-right: 32px;;
+        > a {
+          color: $gray-darkest;
+          margin: 0 16px;
+          &:hover {
+            text-decoration: none;
+          }
+          &:hover {
+            color: $primary-color;
+          }
+        }
+      }
+    }
   }
 </style>

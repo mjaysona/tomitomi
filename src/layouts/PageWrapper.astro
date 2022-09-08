@@ -19,11 +19,21 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
       href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <title>{SITE_TITLE} 🍅</title>
+    <title>{SITE_TITLE}</title>
   </head>
   <body>
-    <Header />
-    <slot />
-    <Footer />
+    <div class="page">
+      <Header />
+      <slot />
+      <Footer />
+    </div>
   </body>
 </html>
+<style>
+.page {
+  box-sizing: border-box;
+  padding: 16px 32px;
+  margin: auto;
+  width: min(1024px, 100%);
+}
+</style>

@@ -1,0 +1,65 @@
+---
+import { TagItem } from '@/interfaces/tags';
+import Icon from 'astro-icon';
+import TagGroup from './TagGroup.astro';
+
+export interface Props {
+  compact?: boolean,
+}
+
+const { compact } = Astro.props;
+
+const data = [
+  {
+    label: 'Development',
+    size: 'sm',
+    color: 'secondary',
+  },
+  {
+    label: 'Freelance',
+    size: 'sm',
+  },
+  {
+    label: 'Frontend',
+    size: 'sm',
+  }
+] as TagItem[];
+---
+
+<div class={compact ? 'compact' : ''}>
+  <h2><a href="#">This is my first blog</a></h2>
+  {!compact && (
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  )}
+  <div>
+    <TagGroup data={data} />
+    <span>2022 Sep 06</span>
+  </div>
+</div>
+<style lang="scss">
+  @import '../styles/variables.scss';
+
+  div {
+    position: relative;
+    > div {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      span {
+        color: $gray-lighter;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+    }
+    h2 {
+      color: $primary-color;
+    }
+    &.compact {
+      display: flex;
+      flex-direction: column-reverse;
+      h2 {
+        margin-top: 12px;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,39 @@
+---
+import { Icon } from 'astro-icon'
+---
+
+<div>
+  <div>
+    <Icon name="fa:github-alt" />
+  </div>
+  <div>
+    <Icon name="fa-regular:paper-plane" />
+  </div>
+  <div>
+    <Icon name="fa-brands:linkedin-in" />
+  </div>
+  <div>
+    <Icon name="fa-solid:rss" />
+  </div>
+</div>
+<style lang="scss">
+  @import '../styles/variables.scss';
+
+  div {
+    color: $primary-color;
+    display: flex;
+    > div {
+      cursor: pointer;
+      height: 20px;
+      margin: 0 8px;
+      width: 20px;
+      &:first-child {
+        margin-left: 0;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+  
+</style>

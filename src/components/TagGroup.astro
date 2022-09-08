@@ -1,0 +1,32 @@
+---
+
+import { TagItem } from '@/interfaces/tags';
+import Tag from '@/components/Tag.astro';
+
+export interface Props {
+  data: TagItem[],
+};
+
+const { data } = Astro.props;
+---
+
+<div>
+  {data.map(({ color, label, size}) => (
+    <div class={size}>
+      <Tag color={color} label={label} size={size} />
+    </div>
+  ))}
+</div>
+<style lang="scss">
+  div {
+    display: inline-block;
+    > div {
+      &.sm {
+        margin-right: 8px;
+      }
+      &.md {
+        margin: 0 12px 12px 0;
+      }
+    }
+  }
+</style>

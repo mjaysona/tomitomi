@@ -1,9 +1,8 @@
 ---
-import ArticleHead from '@/components/ArticleHead.astro';
 import ArticleItem from '@/components/ArticleItem.astro';
 import TagGroup from '@/components/TagGroup.astro';
-import { TagItem } from '@/interfaces/tags';
 import PageWrapper from '@/layouts/PageWrapper.astro';
+import { TagItem } from '@/interfaces/tags';
 
 const tags = [
   {
@@ -75,38 +74,11 @@ const tags = [
 ---
 
 <PageWrapper>
-  <div class="header">
-    <ArticleHead />
-  </div>
   <div class="content">
     <div class="content__articles">
+      <h2>Articles</h2>
       <div>
-        <h4>Featured</h4>
-        <div class="content__articles__featured">
-          <div>
-            <ArticleItem compact />
-          </div>
-          <div>
-            <ArticleItem compact />
-          </div>
-          <div>
-            <ArticleItem compact />
-          </div>
-        </div>
-      </div>
-      <h4>Recent</h4>
-      <div>
-        <div class="content__articles__recent">
-          <div>
-            <ArticleItem compact />
-          </div>
-          <div>
-            <ArticleItem compact />
-          </div>
-          <div>
-            <ArticleItem compact />
-          </div>
-        </div>
+        <ArticleItem />
       </div>
     </div>
     <div class="content__tags">
@@ -118,15 +90,11 @@ const tags = [
   </div>
 </PageWrapper>
 <style lang="scss">
-  .header {
-    margin-top: 24px;
-  }
   .content {
     display: grid;
     gap: 116px;
-    grid-template-columns: 1fr 1fr;
-    margin-top: 64px;
-    h4 {
+    grid-template-columns: 1.25fr 0.75fr;
+    h2 {
       margin: 0 0 32px;
       padding-top: 24px;
     }
