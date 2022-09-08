@@ -1,13 +1,15 @@
 ---
 import { TagItem } from '@/interfaces/tags';
-import Icon from 'astro-icon';
 import TagGroup from './TagGroup.astro';
 
 export interface Props {
+  title: string,
+  excerpt?: string,
+  date: string,
   compact?: boolean,
 }
 
-const { compact } = Astro.props;
+const { title, excerpt, date, compact } = Astro.props;
 
 const data = [
   {
@@ -27,13 +29,13 @@ const data = [
 ---
 
 <div class={compact ? 'compact' : ''}>
-  <h2><a href="#">This is my first blog</a></h2>
+  <h2><a href="#">{title}</a></h2>
   {!compact && (
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    <p>{excerpt}</p>
   )}
   <div>
     <TagGroup data={data} />
-    <span>2022 Sep 06</span>
+    <span>{date}</span>
   </div>
 </div>
 <style lang="scss">

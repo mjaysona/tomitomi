@@ -4,6 +4,10 @@ import TagGroup from '@/components/TagGroup.astro';
 import PageWrapper from '@/layouts/PageWrapper.astro';
 import { TagItem } from '@/interfaces/tags';
 
+const articles = (await Astro.glob('../articles/*.md')).sort(
+	(a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
+);
+
 const tags = [
   {
     label: 'Freelance',
@@ -77,8 +81,12 @@ const tags = [
   <div class="content">
     <div class="content__articles">
       <h2>Articles</h2>
-      <div>
-        <ArticleItem />
+      <div class="content__list">
+        {articles.map(({ frontmatter: { title, excerpt, pubDate } }) => (
+          <div class="content__list__item">
+            <ArticleItem title={title} excerpt={excerpt} date={pubDate}/>
+          </div>
+        ))}
       </div>
     </div>
     <div class="content__tags">
@@ -99,10 +107,9 @@ const tags = [
       padding-top: 24px;
     }
     .content__articles {
-      > div {
-        padding-bottom: 36px;
-        > div > div {
-          margin-bottom: 36px;
+      .content__list {
+        .content__list__item {
+          margin-bottom: 32px;
         }
       }
     }

@@ -5,6 +5,15 @@ import TagGroup from '@/components/TagGroup.astro';
 import { TagItem } from '@/interfaces/tags';
 import PageWrapper from '@/layouts/PageWrapper.astro';
 
+const articles = await Astro.glob('../articles/*.md');
+const featuredArticles = articles.filter(({ frontmatter: { featured } }) => (
+  featured
+));
+const recentArticles = articles.sort(
+	(a, b) => new Date(b.frontmatter.pubDate).valueOf()
+    - new Date(a.frontmatter.pubDate).valueOf()
+).slice(0, 3);
+
 const tags = [
   {
     label: 'Freelance',
@@ -83,29 +92,21 @@ const tags = [
       <div>
         <h4>Featured</h4>
         <div class="content__articles__featured">
-          <div>
-            <ArticleItem compact />
-          </div>
-          <div>
-            <ArticleItem compact />
-          </div>
-          <div>
-            <ArticleItem compact />
-          </div>
+          {featuredArticles.map(({ frontmatter: { title, pubDate } }) => (
+            <div>
+              <ArticleItem title={title} date={pubDate} compact />
+            </div>
+          ))}
         </div>
       </div>
       <h4>Recent</h4>
       <div>
         <div class="content__articles__recent">
-          <div>
-            <ArticleItem compact />
-          </div>
-          <div>
-            <ArticleItem compact />
-          </div>
-          <div>
-            <ArticleItem compact />
-          </div>
+          {recentArticles.map(({ frontmatter: { title, pubDate } }) => (
+            <div>
+              <ArticleItem title={title} date={pubDate} compact />
+            </div>
+          ))}
         </div>
       </div>
     </div>
