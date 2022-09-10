@@ -1,17 +1,21 @@
 ---
 import { SITE_TITLE } from '../config';
 import Presence from './Presence.astro';
+import { Icon } from 'astro-icon';
 ---
-
 <header>
-  <h2>
-    <a href="/">&lt;{SITE_TITLE}/&gt;</a>
-  </h2>
-  <div>
+  <div class="header__head">
+    <h2>
+      <a href="/">&lt;{SITE_TITLE} /&gt;</a>
+    </h2>
+    <div class="header__head__mobile-menu">
+      <Icon name="eva:menu-outline" />
+    </div>
+  </div>
+  <div class="header__actions">
 		<div class="header__nav">
       <a href="/articles">Articles</a>
-      <a href="#">Development</a>
-      <a href="#">About me</a>
+      <a href="/aboutMe">About me</a>
     </div>
     <Presence />
   </div>
@@ -32,17 +36,46 @@ import Presence from './Presence.astro';
       font-size: 2rem;
       font-weight: 700;
     }
-    div {
+    .header__head {
+      align-items: center;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      .header__head__mobile-menu {
+        width: 28px;
+        height: 28px;
+        display: none;
+      }
+    }
+    .header__actions {
       display: flex;
       .header__nav {
         font-weight: 600;
-        margin-right: 32px;;
+        margin-right: 32px;
         > a {
-          color: $gray-darkest;
           margin: 0 16px;
           &:hover {
-            color: $primary-color;
+            color: $primary-color-dark;
           }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 720px) {
+    header { 
+      flex-direction: column-reverse;
+      .header__head {
+        padding-top: 24px;
+        width: 100%;
+        .header__head__mobile-menu {
+          display: block;
+        }
+      }
+      .header__actions {
+        padding-top: 16px;
+        .header__nav {
+          display: none;
         }
       }
     }

@@ -1,0 +1,20 @@
+---
+import TagGroup from '@/components/TagGroup.astro';
+
+const articles = await Astro.glob('../articles/*.md');
+let tags:string[] = [];
+
+tags = articles.flatMap((article) => [...article.frontmatter.tags])
+
+const uniqueTags:string[] = [...new Set(tags)];
+---
+<>
+  <h4>Browse by tags</h4>
+  <TagGroup tags={uniqueTags} size="md" color="secondary" />
+</>
+<style lang="scss">
+  h4 {
+    margin: 0 0 21px;
+    padding-top: 21px;
+  }
+</style>

@@ -1,19 +1,18 @@
 ---
-
-import { TagItem } from '@/interfaces/tags';
 import Tag from '@/components/Tag.astro';
+import { TagItem } from '@/interfaces/tag';
 
-export interface Props {
-  data: TagItem[],
+export interface Props extends TagItem {
+  tags: Array<string>,
 };
 
-const { data } = Astro.props;
+const { tags, color, size, multipleLines } = Astro.props;
 ---
 
 <div>
-  {data.map(({ color, label, size}) => (
-    <div class={size}>
-      <Tag color={color} label={label} size={size} />
+  {tags.map(tag => (
+    <div class={`${size}`}>
+      <Tag tag={tag} color={color} size={size} />
     </div>
   ))}
 </div>
@@ -25,7 +24,7 @@ const { data } = Astro.props;
         margin-right: 8px;
       }
       &.md {
-        margin: 0 12px 12px 0;
+        margin-right: 12px;
       }
     }
   }

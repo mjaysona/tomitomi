@@ -1,46 +1,28 @@
 ---
-import { TagItem } from '@/interfaces/tags';
+import { TagItem } from '@/interfaces/tag';
 
-export interface Props extends TagItem{};
+export interface Props extends TagItem{
+  tag: string,
+};
 
-const { color, label, size }:TagItem = Astro.props;
+const { tag, size }:Props = Astro.props;
 ---
-
-<div class={`${size} ${color || ''}`}>
-  {label}
-</div>
+<a
+  href={`/articles/tags/${tag.toLowerCase()}/`}
+  class={`tag ${size}`}
+>
+  {tag}
+</a>
 <style lang="scss">
   @import '../styles/variables.scss';
 
-  div {
-    border: 3px solid $gray-lighter;
-    border-radius: 8px;
-    color: $gray-lighter;
-    display: inline-block;
-    &.secondary {
-      border-color: $secondary-color;
-      color: $secondary-color;
-    }
+  a.tag {
+    color: $secondary-color;
     &.sm {
       font-size: 0.75rem;
-      font-weight: 600;
-      padding: 4px 8px;
     }
     &.md {
       font-size: 1rem;
-      font-weight: 600;
-      padding: 8px 12px;
-    }
-    &:hover {
-      cursor: pointer;
-      background: $gray-lighter;
-      border-color: transparent;
-      color: white;
-      &.secondary {
-        background: $secondary-color;
-        border-color: transparent;
-        color: white;
-      }
     }
   }
 </style>

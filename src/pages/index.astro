@@ -1,11 +1,11 @@
 ---
+import AllTags from '@/components/AllTags.astro';
 import ArticleHead from '@/components/ArticleHead.astro';
 import ArticleItem from '@/components/ArticleItem.astro';
-import TagGroup from '@/components/TagGroup.astro';
-import { TagItem } from '@/interfaces/tags';
+import { Article } from '@/interfaces/articles';
 import PageWrapper from '@/layouts/PageWrapper.astro';
 
-const articles = await Astro.glob('../articles/*.md');
+const articles = await Astro.glob<Article>('../articles/*.md');
 const featuredArticles = articles.filter(({ frontmatter: { featured } }) => (
   featured
 ));
@@ -13,74 +13,6 @@ const recentArticles = articles.sort(
 	(a, b) => new Date(b.frontmatter.pubDate).valueOf()
     - new Date(a.frontmatter.pubDate).valueOf()
 ).slice(0, 3);
-
-const tags = [
-  {
-    label: 'Freelance',
-    size: 'md',
-    color: 'secondary',
-  },
-  {
-    label: 'Frontend',
-    size: 'md',
-    color: 'secondary',
-  },
-  {
-    label: 'VueJS',
-    size: 'md',
-    color: 'secondary',
-  },
-  {
-    label: 'Agile',
-    size: 'md',
-    color: 'secondary',
-  },
-  {
-    label: 'Management',
-    size: 'md',
-    color: 'secondary',
-  },
-  {
-    label: 'Figma',
-    size: 'md',
-    color: 'secondary',
-  },
-  {
-    label: 'UIUX',
-    size: 'md',
-    color: 'secondary',
-  },
-  {
-    label: 'NextJS',
-    size: 'md',
-    color: 'secondary',
-  },
-  {
-    label: 'ReactJS',
-    size: 'md',
-    color: 'secondary',
-  },
-  {
-    label: 'Astro',
-    size: 'md',
-    color: 'secondary',
-  },
-  {
-    label: 'Web Development',
-    size: 'md',
-    color: 'secondary',
-  },
-  {
-    label: 'Web Components',
-    size: 'md',
-    color: 'secondary',
-  },
-  {
-    label: 'SSR',
-    size: 'md',
-    color: 'secondary',
-  },
-] as TagItem[];
 ---
 
 <PageWrapper>
@@ -88,23 +20,27 @@ const tags = [
     <ArticleHead />
   </div>
   <div class="content">
+    <!-- Enable feature when there is enough content -->
     <div class="content__articles">
       <div>
-        <h4>Featured</h4>
-        <div class="content__articles__featured">
-          {featuredArticles.map(({ frontmatter: { title, pubDate } }) => (
-            <div>
-              <ArticleItem title={title} date={pubDate} compact />
-            </div>
-          ))}
-        </div>
-      </div>
-      <h4>Recent</h4>
-      <div>
+        <h4>Recent</h4>
         <div class="content__articles__recent">
-          {recentArticles.map(({ frontmatter: { title, pubDate } }) => (
+          {recentArticles.map(({
+            frontmatter: {
+              title,
+              pubDate,
+              tags,
+              slug,
+            }
+          }) => (
             <div>
-              <ArticleItem title={title} date={pubDate} compact />
+              <ArticleItem
+                title={title} 
+                pubDate={pubDate}
+                tags={tags}
+                slug={slug}
+                compact
+              />
             </div>
           ))}
         </div>
@@ -112,8 +48,7 @@ const tags = [
     </div>
     <div class="content__tags">
       <div>
-        <h4>Browse by tags</h4>
-        <TagGroup data={tags} />
+        <AllTags />
       </div>
     </div>
   </div>
@@ -124,13 +59,10 @@ const tags = [
   }
   .content {
     display: grid;
+    flex: 1;
     gap: 116px;
     grid-template-columns: 1fr 1fr;
     margin-top: 64px;
-    h4 {
-      margin: 0 0 32px;
-      padding-top: 24px;
-    }
     .content__articles {
       > div {
         padding-bottom: 36px;

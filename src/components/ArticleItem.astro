@@ -1,47 +1,34 @@
 ---
-import { TagItem } from '@/interfaces/tags';
+import { Article } from '@/interfaces/articles';
 import TagGroup from './TagGroup.astro';
 
-export interface Props {
-  title: string,
-  excerpt?: string,
-  date: string,
+export interface Props extends Article {
   compact?: boolean,
 }
 
-const { title, excerpt, date, compact } = Astro.props;
-
-const data = [
-  {
-    label: 'Development',
-    size: 'sm',
-    color: 'secondary',
-  },
-  {
-    label: 'Freelance',
-    size: 'sm',
-  },
-  {
-    label: 'Frontend',
-    size: 'sm',
-  }
-] as TagItem[];
+const { title, excerpt, pubDate, compact, tags, slug } = Astro.props;
 ---
-
-<div class={compact ? 'compact' : ''}>
-  <h2><a href="#">{title}</a></h2>
+<div class={`article-card ${compact ? 'compact' : ''}`}>
+  <h2><a href={`/articles/${slug}/`}>{title}</a></h2>
   {!compact && (
     <p>{excerpt}</p>
   )}
   <div>
-    <TagGroup data={data} />
-    <span>{date}</span>
+    <div class="article-card__other-info">
+      <span>Tags: </span>
+      <TagGroup tags={tags} size="sm" />
+    </div>
+    <span>{pubDate}</span>
   </div>
 </div>
 <style lang="scss">
   @import '../styles/variables.scss';
 
-  div {
+  div.article-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+    padding: 16px 20px;
     position: relative;
     > div {
       align-items: center;
@@ -50,7 +37,6 @@ const data = [
       span {
         color: $gray-lighter;
         font-size: 0.75rem;
-        font-weight: 600;
       }
     }
     h2 {
@@ -61,6 +47,11 @@ const data = [
       flex-direction: column-reverse;
       h2 {
         margin-top: 12px;
+      }
+    }
+    .article-card__other-info {
+      > span {
+        margin-right: 8px;
       }
     }
   }

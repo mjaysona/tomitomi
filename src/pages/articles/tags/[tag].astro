@@ -1,0 +1,31 @@
+---
+import { Article } from '@/interfaces/articles';
+import ArticleListWrapper from '@/layouts/ArticleListWrapper.astro';
+import { StaticPaths } from '@/interfaces/native-astro';
+
+export const getStaticPaths = async () => {
+  let articles = await Astro.glob<Article>("../../../articles/*.md");
+
+  articles = articles.sort((a, b) => {
+    return new Date(b.frontmatter.pubDate).valueOf()
+      - new Date(a.frontmatter.pubDate).valueOf()
+  });
+
+  const tags = articles.flatMap((article) => [...article.frontmatter.tags])
+  const uniqueTags = [...new Set(tags)]
+
+  return uniqueTags.flatMap((tag):StaticPaths[] => {
+    const filteredArticles = articles.filter((article) => (
+      article.frontmatter.tags.includes(tag)
+    ));
+
+    return filteredArticles.map(() => ({
+      params: { tag: tag.toLowerCase() },
+      props: { filteredArticles, tag },
+    }));
+  })
+}
+
+const { filteredArticles, tag: rawTag } = Astro.props;
+---
+<ArticleListWrapper articles={filteredArticles} tag={rawTag} />

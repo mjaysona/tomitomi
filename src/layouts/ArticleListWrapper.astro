@@ -1,0 +1,79 @@
+---
+import PageWrapper from "./PageWrapper.astro";
+import AllTags from "@/components/AllTags.astro";
+import ArticleItem from "@/components/ArticleItem.astro";
+import { Articles } from '@/interfaces/articles';
+
+export interface Props extends Articles{}
+
+const { tag, articles } = Astro.props;
+---
+<PageWrapper>
+  <div class="content">
+    <div class="content__articles">
+      <div class="content__articles__title">
+        <h2>Articles</h2>
+        {tag && <span>Tag: {tag}</span>}
+      </div>
+      <div class="content__list">
+        {articles.map(({
+          frontmatter: {
+            title,
+            excerpt,
+            pubDate,
+            tags,
+            slug,
+          }
+        }) => (
+          <div class="content__list__item">
+            <ArticleItem
+              title={title}
+              excerpt={excerpt}
+              pubDate={pubDate}
+              tags={tags}
+              slug={slug}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="content__tags">
+      <div>
+        <AllTags />
+      </div>
+    </div>
+  </div>
+</PageWrapper>
+<style lang="scss">
+  @import '../styles/variables.scss';
+
+  .content {
+    display: grid;
+    flex: 1;
+    gap: 116px;
+    grid-template-columns: 1.25fr 0.75fr;
+    .content__articles__title {
+      margin: 0 0 32px;
+      padding-top: 24px;
+      h2 {
+        margin-bottom: 4px;
+      }
+      span {
+        text-transform: capitalize;
+      }
+    }
+    .content__articles {
+      .content__list {
+        .content__list__item {
+          margin-bottom: 32px;
+        }
+      }
+    }
+    .content__tags {
+      > div {
+        position: sticky;
+        top: 0;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,75 @@
+---
+import TagGroup from '@/components/TagGroup.astro';
+import { Article } from '@/interfaces/articles';
+import { StaticPaths } from '@/interfaces/native-astro';
+import PageWrapper from '@/layouts/PageWrapper.astro';
+
+export const getStaticPaths = async () => {
+  let articles = await Astro.glob<Article>("../../articles/*.md");
+
+  return articles.map(({ 
+    frontmatter: {
+      pubDate,
+      tags,
+      slug
+    },
+    Content,
+  }):StaticPaths => ({
+    params: { article: slug },
+    props: {
+      pubDate,
+      tags,
+      Content,
+    },
+  }));
+}
+
+const {
+  pubDate,
+  tags,
+  Content,
+} = Astro.props;
+---
+<PageWrapper>
+  <div class="article">
+    <div class="article__head">
+      <div>
+        <span>Tags: </span>
+        <TagGroup tags={tags} size="md"/>
+      </div>
+      <span>{pubDate}</span>
+    </div>
+    <div class="article__content">
+      <Content />
+    </div>
+  </div>
+</PageWrapper>
+<style lang="scss">
+  @import '../../styles/variables.scss';
+
+  .article {
+    margin-top: 24px;
+    h1 {
+      margin-top: 12px;
+    }
+    .article__head {
+      align-items: center;
+      color: $gray-lighter;
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 16px;
+      > div > span {
+        margin-right: 8px;
+      }
+    }
+    .article__content {
+      background: white;
+      border-radius: 16px;
+      box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+      padding: 24px 32px;
+      h1:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+</style>

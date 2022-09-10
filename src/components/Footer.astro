@@ -1,7 +1,6 @@
 ---
 import Presence from './Presence.astro';
 ---
-
 <footer>
 	<Presence />
   <span>Powered by <a href="#">Astro</a></span>
@@ -13,8 +12,10 @@ import Presence from './Presence.astro';
     align-items: center;
     color: $gray-light;
     display: flex;
-    height: 60px;
     justify-content: space-between;
-    padding-top: 80px;
+    padding: 80px 0 24px;
+    a {
+      color: $secondary-color;
+    }
   }
 </style>

@@ -1,0 +1,55 @@
+---
+import PageWrapper from '@/layouts/PageWrapper.astro';
+import { Icon } from 'astro-icon'
+---
+
+<PageWrapper>
+  <div class="about-me">
+    <h2>About me</h2>
+    <p>
+      Hi, I'm a Frontend Software Engineer and this is where I dump my development shenanigas. Just kidding! I made this blog because I occassionally have things I do or thoughts that I want to document and get back to and also to improve my content creation skill when it comes to writing.
+    </p>
+    <h2>Want to connect?</h2>
+    <p>
+      You can reach me through any of the platforms below:
+    </p>
+    <div class="about-me__contact">
+      <div class="about-me__contact__item">
+        <div>
+          <Icon name="mdi:gmail" />
+        </div>
+        <a href="#">Send me an email</a>
+      </div>
+      <div class="about-me__contact__item">
+        <div>
+          <Icon name="fa-brands:linkedin-in" />
+        </div>
+        <a href="#">Drop me a message</a>
+      </div>
+    </div>
+  </div>
+</PageWrapper>
+<style lang="scss">
+  div.about-me {
+    padding-top: 24px;
+    .about-me__contact {
+      padding-top: 12px;
+      .about-me__contact__item {
+        align-items: center;
+        display: flex;
+        margin-bottom: 12px;
+        > div {
+          align-items: center;
+          display: flex;
+          svg {
+            width: 24px;
+            height: 24px;
+          }
+        }
+        > a {
+          margin-left: 16px;
+        }
+      }
+    }
+  }
+</style>

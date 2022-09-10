@@ -3,6 +3,7 @@ title: "Markdown Style Guide"
 slug: "markdown-style-guide"
 excerpt: "Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro."
 pubDate: "Jul 01 2022"
+tags: ["Documentation", "Freelance"]
 ---
 
 Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.
