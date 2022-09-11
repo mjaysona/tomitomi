@@ -1,0 +1,59 @@
+---
+const articles = await Astro.glob('../articles/*.mdx');
+let tags:string[] = [];
+
+tags = articles.flatMap((article) => (
+  article.frontmatter.tags
+   ? [...article.frontmatter.tags]
+   : []
+));
+
+const uniqueTags:string[] = [...new Set(tags)];
+---
+<div class="mobile-menu">
+  <div class="mobile-menu__pages">
+    <a href="/articles">Articles</a>
+    <a href="/about-me">About me</a>
+  </div>
+  <div class="mobile-menu__tags">
+    <p>Browse</p>
+    {uniqueTags.map((tag) => (
+      <a href={`/articles/tags/${tag.toLowerCase()}/`}>{tag}</a>
+    ))}
+  </div>
+</div>
+<style lang="scss">
+  @import '../styles/variables.scss';
+
+  div.mobile-menu {
+    background: white;
+    border-radius: 16px 0 0 16px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+    min-width: 300px;
+    position: absolute;
+    top: 64px;
+    right: -32px;
+    z-index: 999;
+    a, p {
+      color: $gray-darkest;
+      border-bottom: 1px solid $gray-lightest;
+      display: block;
+      padding: 16px 24px;
+      margin: 0;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    a:hover {
+      color: $primary-color;
+    }
+    p {
+      color: $gray-light;;
+    }
+    .mobile-menu__pages {
+      margin-bottom: 16px;
+    }
+  }
+</style>
+<script is:inline>
+</script>
