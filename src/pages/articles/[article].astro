@@ -5,7 +5,7 @@ import { StaticPaths } from '@/interfaces/native-astro';
 import PageWrapper from '@/layouts/PageWrapper.astro';
 
 export const getStaticPaths = async () => {
-  let articles = await Astro.glob<Article>("../../articles/*.md");
+  let articles = await Astro.glob<Article>("../../articles/*.mdx");
 
   return articles.map(({ 
     frontmatter: {

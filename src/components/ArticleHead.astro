@@ -3,7 +3,7 @@ import { Article } from '@/interfaces/articles';
 import Icon from 'astro-icon';
 import TagGroup from './TagGroup.astro';
 
-let articles = await Astro.glob<Article>("../articles/*.md");
+let articles = await Astro.glob<Article>("../articles/*.mdx");
 
 articles = articles.sort((a, b) => {
   return new Date(b.frontmatter.pubDate).valueOf()
@@ -30,8 +30,14 @@ const {
   <div class="content">
     <Content />
   </div>
-  <div class="expand">
-    <div><Icon name="akar-icons:circle-chevron-down-fill" /></div>
+  <div class="article-toggle article-toggle--expanded">
+    <div class="article-toggle__toggle">
+      <Icon
+        class="article-toggle__toggle__icon article-toggle__toggle__icon--visible"
+        name="akar-icons:circle-chevron-down-fill"
+      />
+      <p class="article-toggle__toggle__icon">Collapse article</p>
+    </div>
   </div>
 </div>
 <style lang="scss">
@@ -53,20 +59,36 @@ const {
       }
     }
     .content {
+      background: white;
+      border-radius: 16px;
+      box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+      padding: 24px 32px 56px;
       height: 280px;
       overflow: hidden;
+      &.content--visible {
+        height: auto;
+        ~ .article-toggle {
+          background: none;
+          .article-toggle__toggle {
+            width: auto;
+            height: auto;
+            top: 0;
+          }
+        }
+      }
     }
-    .expand {
+    .article-toggle {
       align-items: end;
+      border-radius: 0 0 16px 16px;
       bottom: 0;
       display: flex;
       height: 140px;
       justify-content: center;
       position: absolute;
       width: 100%;
-      background: -moz-linear-gradient(top,  rgba(251,251,251,0) 0%, rgba(251,251,251,1) 100%); /* FF3.6-15 */
-      background: -webkit-linear-gradient(top,  rgba(251,251,251,0) 0%,rgba(251,251,251,1) 100%); /* Chrome10-25,Safari5.1-6 */
-      background: linear-gradient(to bottom,  rgba(251,251,251,0) 0%,rgba(251,251,251,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
       > div {
         color: $primary-color;
         cursor: pointer;
@@ -75,6 +97,34 @@ const {
         position: relative;
         top: 20px;
       }
+      .article-toggle__toggle__icon {
+        display: none;
+        &.article-toggle__toggle__icon--visible {
+          display: block;
+        }
+      }
     }
   }
 </style>
+<script is:inline>
+  document.querySelector('.article-toggle__toggle')
+    .addEventListener('click', () => {
+      const content = document.querySelector('.content');
+      const articleToggle = document.querySelector('.article-toggle');
+      const toggleTriggers = document.querySelectorAll(
+        '.article-toggle__toggle__icon'
+      );
+      const className = 'article-toggle__toggle__icon--visible';
+      
+      content.classList.toggle('content--visible');
+      articleToggle.classList.toggle('article-toggle--expanded');
+
+      toggleTriggers.forEach((element) => {
+        if (element.classList.contains(className)) {
+          element.classList.remove(className);
+        } else {
+          element.classList.add(className);
+        }
+      });
+  });
+</script>

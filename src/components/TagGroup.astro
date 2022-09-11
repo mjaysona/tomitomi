@@ -6,11 +6,11 @@ export interface Props extends TagItem {
   tags: Array<string>,
 };
 
-const { tags, color, size, multipleLines } = Astro.props;
+const { tags, color, size } = Astro.props;
 ---
 
 <div>
-  {tags.map(tag => (
+  {tags && tags.map(tag => (
     <div class={`${size}`}>
       <Tag tag={tag} color={color} size={size} />
     </div>

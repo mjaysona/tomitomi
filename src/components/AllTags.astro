@@ -1,10 +1,14 @@
 ---
 import TagGroup from '@/components/TagGroup.astro';
 
-const articles = await Astro.glob('../articles/*.md');
+const articles = await Astro.glob('../articles/*.mdx');
 let tags:string[] = [];
 
-tags = articles.flatMap((article) => [...article.frontmatter.tags])
+tags = articles.flatMap((article) => (
+  article.frontmatter.tags
+   ? [...article.frontmatter.tags]
+   : []
+));
 
 const uniqueTags:string[] = [...new Set(tags)];
 ---

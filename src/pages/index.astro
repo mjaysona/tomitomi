@@ -5,7 +5,7 @@ import ArticleItem from '@/components/ArticleItem.astro';
 import { Article } from '@/interfaces/articles';
 import PageWrapper from '@/layouts/PageWrapper.astro';
 
-const articles = await Astro.glob<Article>('../articles/*.md');
+const articles = await Astro.glob<Article>('../articles/*.mdx');
 const featuredArticles = articles.filter(({ frontmatter: { featured } }) => (
   featured
 ));
@@ -20,7 +20,6 @@ const recentArticles = articles.sort(
     <ArticleHead />
   </div>
   <div class="content">
-    <!-- Enable feature when there is enough content -->
     <div class="content__articles">
       <div>
         <h4>Recent</h4>
@@ -76,6 +75,12 @@ const recentArticles = articles.sort(
         position: sticky;
         top: 0;
       }
+    }
+  }
+
+  @media only screen and (max-width: 720px) {
+    .content {
+      display: block;
     }
   }
 </style>
