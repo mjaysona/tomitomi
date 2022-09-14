@@ -27,9 +27,11 @@ import { Icon } from 'astro-icon'
     }
     > div {
       cursor: pointer;
-      height: 20px;
       margin: 0 8px;
-      width: 20px;
+      svg {
+        height: min(4vw, 20px);
+        width: min(4vw, 20px);
+      }
       &:first-child {
         margin-left: 0;
       }

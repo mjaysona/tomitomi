@@ -38,7 +38,7 @@ import MobileMenu from './MobileMenu.astro';
     align-items: center;
     display: flex;
     justify-content: space-between;
-    padding-bottom: 48px;
+    padding-bottom: min(4vw, 48px);
     a:hover {
       text-decoration: none;
     }
@@ -103,14 +103,14 @@ import MobileMenu from './MobileMenu.astro';
     header { 
       flex-direction: column-reverse;
       .header__head {
-        padding-top: 24px;
+        padding-top: min(4vw, 24px);
         width: 100%;
         .header__head__mobile-menu {
           display: block;
         }
       }
       .header__actions {
-        padding-top: 16px;
+        padding-top: min(2vw, 16px);
         .header__nav {
           display: none;
         }

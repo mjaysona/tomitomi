@@ -61,10 +61,10 @@ const recentArticles = articles.sort(
     flex: 1;
     gap: 116px;
     grid-template-columns: 1fr 1fr;
-    margin-top: 64px;
+    margin-top: min(4vw, 16px);
     .content__articles {
       > div {
-        padding-bottom: 36px;
+        padding-bottom:  min(2vw, 56px);;
         > div > div {
           margin-bottom: 36px;
         }
@@ -79,6 +79,9 @@ const recentArticles = articles.sort(
   }
 
   @media only screen and (max-width: 720px) {
+    .header {
+      margin-bottom: min(18vw, 72px);
+    }
     .content {
       display: block;
     }
