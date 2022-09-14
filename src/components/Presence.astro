@@ -3,34 +3,49 @@ import { Icon } from 'astro-icon'
 ---
 <div>
   <div>
-    <Icon name="fa:github-alt" />
+    <a href="https://github.com/mjaysona" target="_blank">
+      <Icon name="fa:github-alt" />
+    </a>
   </div>
+  <!-- <div>
+    <a href="https://github.com/mjaysona" target="_blank">
+      <Icon name="fa-regular:paper-plane" />
+    </a>
+  </div> -->
   <div>
-    <Icon name="fa-regular:paper-plane" />
+    <a
+      href="https://www.linkedin.com/in/mark-jayson-alimboyogen-8369a38b/"
+      target="_blank"
+    >
+      <Icon name="fa-brands:linkedin-in" />
+    </a>
   </div>
-  <div>
-    <Icon name="fa-brands:linkedin-in" />
-  </div>
-  <div>
-    <Icon name="fa-solid:rss" />
-  </div>
+  <!-- <div>
+    <a href="https://github.com/mjaysona" target="_blank">
+      <Icon name="fa-solid:rss" />
+    </a>
+  </div> -->
 </div>
 <style lang="scss">
   @import '../styles/variables.scss';
 
   div {
     align-items: center;
-    color: $gray-light;
     display: flex;
-    &:hover {
-      color:$gray-dark;
-    }
     > div {
       cursor: pointer;
       margin: 0 8px;
-      svg {
-        height: min(4vw, 20px);
-        width: min(4vw, 20px);
+      a {
+        color: $gray-dark;
+        display: flex;
+        align-items: center;
+        svg {
+          height: min(4vw, 20px);
+          width: min(4vw, 20px);
+        }
+        &:hover {
+          color: $gray-darker;
+        }
       }
       &:first-child {
         margin-left: 0;
