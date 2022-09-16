@@ -1,5 +1,5 @@
 {
-  "name": "@example/blog",
+  "name": "tomitomi",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -21,5 +21,17 @@
     "eslint": "^8.23.0",
     "eslint-plugin-astro": "^0.18.0",
     "sass": "^1.54.8"
-  }
+  },
+  "description": "tomitomi blog",
+  "main": "index.astro",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mjaysona/tomitomi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mjaysona/tomitomi/issues"
+  },
+  "homepage": "https://github.com/mjaysona/tomitomi#readme"
 }
