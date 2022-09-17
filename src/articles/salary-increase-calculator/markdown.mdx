@@ -1,0 +1,122 @@
+---
+title: "Salary increase calculator"
+slug: "salary-increase-calculator"
+excerpt: "A simple web tool for Filipinos to easily compute how much do they get as take home after an increase in their gross salary."
+pubDate: "Jul 08 2022"
+featured: true
+tags: ["NextJS", "Typescript", "Sass", "ReactJS", "Figma"]
+path: "/articles/salary-increase-calculator"
+---
+import MarkdownImage from '@/components/MarkdownImage.astro';
+
+# {frontmatter.title}
+### {frontmatter.excerpt}
+
+As a private employee living in the Philippines, I am contacted by recruiters from time to time, some I entertain and some not. In cases that I do, I am often placed in a situation where I need to know the exact amount of my take home pay for a specific percentage of increase. In those situations, what I usually do is go back to online tax calculators in the net and then input these values again in my excel sheet. Doing this everytime seems like a waste of time and effort and what's worse is more often than not, these calculators are not up to date so some double checking is needed. So, I decided to make my own web app where the tax computations are already integrated and my actual take home pay are computed with the consideration of all basic tax deductions.
+
+You can visit the finished web app here: https://salaraise.vercel.app/
+
+## Requirements
+
+It's common sense to have the requirements ready before doing some work so I got that ready before anything else but considering that this is a project that I did on my free time, I didn't have the luxury be very detailed about it so I settled with just listing the functionalities I want this web app to initially have.
+
+- User should be able to calculate increase in net income after a gross increase
+  - User should be able to input his monthly salary and the increase percentage he wants
+  - User should see a table showing his current monthly gross salary, income tax, government deductions, and monthly net income.
+  - User should see a table showing his gross monthly salary, income tax, government deductions, and net after a gross increase.
+  
+- User should be able to calculate his annual income.
+  - User should be able to input his monthly salary.
+  - User should see a table showing his annual gross salary, annual income tax, annual government deductions, and annual net income.
+
+With the requirements ready, it's time to do some digging about how the Philippine's government tax works.
+
+## Research
+
+Computing the overall deductions was not as simple as I thought it would be, I realized that each government deductions (SSS, Philhealth, and PAG-IBIG) has their own tables that indicates the amount to be deducted based on an employee's salary range. I needed to dig those things up in several websites just to make sure that I'm using the updated computations. 
+
+Once I got that figured out, I know that it would be difficult to map the formulas and computations during development so I figured I'll map those on a spreadsheet first.
+
+<MarkdownImage
+  alt="Government deductions table"
+  src={`${frontmatter.path}/images/government-deductions-table.png`}
+/>
+
+I won't be discussing how these are computed nor show their respective formulas here because I don't think I'll be able to present them in a way a casual reader would easily understand so I'll leave that to the expert. What I'll do isntead is leave some links after this article for your reference.
+
+Now that I got it mapped out, I think I'm ready to design my web app.
+
+## Design
+
+I don't mind developing an app using low-fidelity mockups but I prefer if a high-fidelity mockup is available. This is so I can have a precise idea on the user interfaces that can be reused and how I can break down my components later in development. Although I was an Adobe XD user before, I decided to use Figma this time (and moving forward) to accomplish this mainly because of its cloud service which is free, this helps a lot because I usually switch between machines when working on projects.
+
+<MarkdownImage
+  alt="Salary Increase Calculator initial design"
+  src={`${frontmatter.path}/images/salaraise-initial-design.png`}
+/>
+
+When it comes to designing my personal projects, I like to experiment so you might find the design eccentric. This is the only time I can do whatever I want when it comes to design so please understand.
+
+## Development
+
+For this app I decided to use NextJS, Typescript and SASS. There actually is no technical reasons why I'll be using this, I just want to brush up my ReactJS and Typescript skills.
+
+### Components
+
+My usual step after I got my local environment, configs, and folder structures setup is identify the components that I will be using and then develop them individually. For this project, I have identified the following:
+
+- **`<Input />`** - An input component that can either be an amount or a percentage depending on its type property.
+- **`<SelectDropdown />`** - A dropdown component that accepts an `Array of Objects` for its options.
+- **`<ContentCard />`** - A card component that wraps a static content.
+- **`<SalaryTable />`** - A table component that accepts an `Array of Objects` to generally display labels and their respective amount.
+
+<MarkdownImage
+  alt="Salary Increase Calculator components"
+  src={`${frontmatter.path}/images/components.png`}
+/>
+
+### Pages
+
+I don't plan to add irrelevant content here. Moving forward, additional functionalities will be accessed using the dropdown, hence this a single page web app.
+
+### Handling of computations
+
+Earlier, I have identified the basic salary deductions. These are the Income Tax and Government Taxes that are SSS, Philhealth, and PAG-IBIG. The computation for these changes occasionally. An example would be Philhealth which is currently at a premium rate of 4% at the moment but will increase to 4.5% on 2023. To accommodate this change in the future, I made sure to have separate methods for them instead of having a single method that computes for everything. This way, I can modify their respective method without affecting the other.
+
+```js
+const computeSss = (value: number): number => {
+  ...
+};
+
+const computeSss = (value: number): number => {
+  ...
+};
+
+const computeSss = (value: number): number => {
+  ...
+};
+
+const computeWithholdingTax = (value: number): number => {
+  ...
+};
+```
+
+Getting the computation spot on took a time of time because I needed to double check and compare the results in a more reliable computation (in my opinion) I made in the spreadsheet. Once I got everything checked, I created a method that uses these methods to finally compute for my take home pay or monthly net income.
+
+```js
+const netMonthly = computeNetIncome({
+  ...
+});
+```
+
+And then double checked everything and compare again until I got everything right. Now that I got my components and utility methods ready to use, I was ready to create my page layout and develop my calculator.
+
+### Responsiveness
+
+
+
+## Design revisions
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
+
+## What I learned?

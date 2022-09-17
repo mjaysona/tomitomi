@@ -4,7 +4,7 @@ import ArticleListWrapper from '@/layouts/ArticleListWrapper.astro';
 import { StaticPaths } from '@/interfaces/native-astro';
 
 export const getStaticPaths = async () => {
-  let articles = await Astro.glob<Article>("../../../articles/*.mdx");
+  let articles = await Astro.glob<Article>("../../../articles/**/*.mdx");
 
   articles = articles.sort((a, b) => {
     return new Date(b.frontmatter.pubDate).valueOf()

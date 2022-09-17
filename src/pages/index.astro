@@ -5,7 +5,7 @@ import ArticleItem from '@/components/ArticleItem.astro';
 import { Article } from '@/interfaces/articles';
 import PageWrapper from '@/layouts/PageWrapper.astro';
 
-const articles = await Astro.glob<Article>('../articles/*.mdx');
+const articles = await Astro.glob<Article>('../articles/**/*.mdx');
 const featuredArticles = articles.filter(({ frontmatter: { featured } }) => (
   featured
 ));

@@ -1,0 +1,28 @@
+---
+import { TagItem } from '@/interfaces/tag';
+
+export interface Props extends TagItem{
+  alt: string,
+  src: string,
+};
+
+const { alt, src }:Props = Astro.props;
+---
+<div class="markdown-image">
+  <div>
+    <img src={`/src${src}`} alt={alt} />
+  </div>
+</div>
+<style lang="scss">
+  div.markdown-image {
+    padding: 20px 0;
+    div {
+      border-radius: 16px;
+      display: flex;
+      overflow: hidden;
+      img {
+        width: 100%;
+      }
+    }
+  }
+</style>
