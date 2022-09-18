@@ -7,7 +7,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "eslint --ext .js,.astro src"
   },
   "dependencies": {
     "@altano/remark-astrojs-image": "^0.0.1-alpha.1",

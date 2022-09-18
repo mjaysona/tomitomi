@@ -11,8 +11,8 @@ const featuredArticles = articles.filter(({ frontmatter: { featured } }) => (
   featured
 ));
 const recentArticles = articles.sort(
-	(a, b) => new Date(b.frontmatter.pubDate).valueOf()
-    - new Date(a.frontmatter.pubDate).valueOf()
+  (a, b) => new Date(b.frontmatter.pubDate).valueOf()
+    - new Date(a.frontmatter.pubDate).valueOf(),
 ).slice(0, 3);
 ---
 
@@ -31,7 +31,7 @@ const recentArticles = articles.sort(
               pubDate,
               tags,
               slug,
-            }
+            },
           }) => (
             <div>
               <ArticleItem

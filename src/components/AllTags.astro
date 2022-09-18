@@ -6,8 +6,8 @@ let tags:string[] = [];
 
 tags = articles.flatMap((article) => (
   article.frontmatter.tags
-   ? [...article.frontmatter.tags]
-   : []
+    ? [...article.frontmatter.tags]
+    : []
 ));
 
 const uniqueTags:string[] = [...new Set(tags)];

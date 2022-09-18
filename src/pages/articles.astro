@@ -2,11 +2,11 @@
 import { Article } from '@/interfaces/articles';
 import ArticleListWrapper from '@/layouts/ArticleListWrapper.astro';
 
-let articles = await Astro.glob<Article>("../articles/**/*.mdx");
+let articles = await Astro.glob<Article>('../articles/**/*.mdx');
 
 articles = articles.sort((a, b) => {
   return new Date(b.frontmatter.pubDate).valueOf()
-    - new Date(a.frontmatter.pubDate).valueOf()
+    - new Date(a.frontmatter.pubDate).valueOf();
 });
 ---
 <ArticleListWrapper articles={articles} />

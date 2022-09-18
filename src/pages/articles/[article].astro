@@ -5,13 +5,13 @@ import { StaticPaths } from '@/interfaces/native-astro';
 import PageWrapper from '@/layouts/PageWrapper.astro';
 
 export const getStaticPaths = async () => {
-  let articles = await Astro.glob<Article>("../../articles/**/*.mdx");
+  let articles = await Astro.glob<Article>('../../articles/**/*.mdx');
 
   return articles.map(({ 
     frontmatter: {
       pubDate,
       tags,
-      slug
+      slug,
     },
     Content,
   }):StaticPaths => ({
@@ -22,7 +22,7 @@ export const getStaticPaths = async () => {
       Content,
     },
   }));
-}
+};
 
 const {
   pubDate,

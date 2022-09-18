@@ -24,7 +24,7 @@ import MobileMenu from './MobileMenu.astro';
     </div>
   </div>
   <div class="header__actions">
-		<div class="header__nav">
+    <div class="header__nav">
       <a href="/articles">Articles</a>
       <a href="/about-me">About me</a>
     </div>
@@ -120,24 +120,24 @@ import MobileMenu from './MobileMenu.astro';
   }
 </style>
 <script is:inline>
-  const menuToggle = document.querySelector(
-    '.header__head__mobile-menu__toggle'
+const menuToggle = document.querySelector(
+  '.header__head__mobile-menu__toggle',
+);
+const menu = document.querySelector('.header__head__mobile-menu__items');
+let isMenuOpen = false;
+
+const toggleMenu = () => {
+  menuToggle.parentElement.classList.toggle(
+    'header__head__mobile-menu--open',
   );
-  const menu = document.querySelector('.header__head__mobile-menu__items');
-  let isMenuOpen = false;
+  isMenuOpen = !isMenuOpen;
+};
 
-  const toggleMenu = () => {
-    menuToggle.parentElement.classList.toggle(
-      'header__head__mobile-menu--open'
-    );
-    isMenuOpen = !isMenuOpen;
+document.addEventListener('click', (e) => {
+  if (e.composedPath().includes(menuToggle)) {
+    toggleMenu();
+  } else if (!e.composedPath().includes(menu) && isMenuOpen) {
+    toggleMenu();
   }
-
-  document.addEventListener('click', (e) => {
-    if (e.composedPath().includes(menuToggle)) {
-      toggleMenu();
-    } else if (!e.composedPath().includes(menu) && isMenuOpen) {
-      toggleMenu();
-    }
-  });
+});
 </script>

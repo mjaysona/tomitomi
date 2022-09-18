@@ -1,7 +1,7 @@
 ---
-import PageWrapper from "./PageWrapper.astro";
-import AllTags from "@/components/AllTags.astro";
-import ArticleItem from "@/components/ArticleItem.astro";
+import PageWrapper from './PageWrapper.astro';
+import AllTags from '@/components/AllTags.astro';
+import ArticleItem from '@/components/ArticleItem.astro';
 import { Articles } from '@/interfaces/articles';
 
 export interface Props extends Articles{}
@@ -23,7 +23,7 @@ const { tag, articles } = Astro.props;
             pubDate,
             tags,
             slug,
-          }
+          },
         }) => (
           <div class="content__list__item">
             <ArticleItem
