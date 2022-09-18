@@ -16,7 +16,7 @@ const { title, excerpt, pubDate, compact, tags, slug } = Astro.props;
   <div>
     <div class="article-card__other-info">
       <span>Tags: </span>
-      <TagGroup tags={tags} size="sm" />
+      <TagGroup tags={tags} size="sm" limit={2} />
     </div>
     <span>{pubDate}</span>
   </div>

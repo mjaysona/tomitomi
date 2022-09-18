@@ -2,16 +2,18 @@
 import { TagItem } from '@/interfaces/tag';
 
 export interface Props extends TagItem{
-  tag: string,
+  tag: string | number,
 };
 
 const { tag, size }:Props = Astro.props;
+
+const isNumber:number = !isNaN(tag);
 ---
 <a
-  href={`/articles/tags/${tag.toLowerCase()}/`}
+  href={isNumber || `/articles/tags/${tag.toLowerCase()}/`}
   class={`tag ${size}`}
 >
-  {tag}
+  {isNumber && '+'}{tag}
 </a>
 <style lang="scss">
   @import '../styles/variables.scss';
