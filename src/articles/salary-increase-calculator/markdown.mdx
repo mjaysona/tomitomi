@@ -7,7 +7,7 @@ featured: true
 tags: ["NextJS", "Typescript", "Sass", "ReactJS", "Figma"]
 path: "/articles/salary-increase-calculator"
 ---
-import MarkdownImage from '@/components/MarkdownImage.astro';
+import { Image } from '@astrojs/image/components';
 
 # {frontmatter.title}
 ### {frontmatter.excerpt}
@@ -37,9 +37,10 @@ Computing the overall deductions was not as simple as I thought it would be, I r
 
 Once I got that figured out, I know that it would be difficult to map the formulas and computations during development so I figured I'll map those on a spreadsheet first.
 
-<MarkdownImage
-  alt="Government deductions table"
-  src={`${frontmatter.path}/images/government-deductions-table.png`}
+<Image
+  alt="Government Deductions Table"
+  src={import('./images/government-deductions-table.png')}
+  width={2000}
 />
 
 I won't be discussing how these are computed nor show their respective formulas here because I don't think I'll be able to present them in a way a casual reader would easily understand so I'll leave that to the expert. What I'll do isntead is leave some links after this article for your reference.
@@ -50,9 +51,10 @@ Now that I got it mapped out, I think I'm ready to design my web app.
 
 I don't mind developing an app using low-fidelity mockups but I prefer if a high-fidelity mockup is available. This is so I can have a precise idea on the user interfaces that can be reused and how I can break down my components later in development. Although I was an Adobe XD user before, I decided to use Figma this time (and moving forward) to accomplish this mainly because of its cloud service which is free, this helps a lot because I usually switch between machines when working on projects.
 
-<MarkdownImage
-  alt="Salary Increase Calculator initial design"
-  src={`${frontmatter.path}/images/salaraise-initial-design.png`}
+<Image
+  alt="Salary Increase Calculator - Initial Design"
+  src={import('./images/salaraise-initial-design.png')}
+  width={2000}
 />
 
 When it comes to designing my personal projects, I like to experiment so you might find the design eccentric. This is the only time I can do whatever I want when it comes to design so please understand.
@@ -70,9 +72,10 @@ My usual step after I got my local environment, configs, and folder structures s
 - **`<ContentCard />`** - A card component that wraps a static content.
 - **`<SalaryTable />`** - A table component that accepts an `Array of Objects` to generally display labels and their respective amount.
 
-<MarkdownImage
-  alt="Salary Increase Calculator components"
-  src={`${frontmatter.path}/images/components.png`}
+<Image
+  alt="Salary Increase Calculator - components"
+  src={import('./images/components.png')}
+  width={2000}
 />
 
 ### Pages
