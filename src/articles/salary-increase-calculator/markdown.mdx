@@ -12,24 +12,24 @@ import { Image } from '@astrojs/image/components';
 # {frontmatter.title}
 ### {frontmatter.excerpt}
 
-As a private employee living in the Philippines, I am contacted by recruiters from time to time, some I entertain and some not. In cases that I do, I am often placed in a situation where I need to know the exact amount of my take home pay for a specific percentage of increase. In those situations, what I usually do is go back to online tax calculators in the net and then input these values again in my excel sheet. Doing this everytime seems like a waste of time and effort and what's worse is more often than not, these calculators are not up to date so some double checking is needed. So, I decided to make my own web app where the tax computations are already integrated and my actual take home pay are computed with the consideration of all basic tax deductions.
+As a private employee living in the Philippines, I am contacted by recruiters from time to time, some I entertain, and some do not. In cases that I do, I am often placed in a situation where I need to know the exact amount of my take-home pay for a specific percentage of increase. In those situations, what I usually do is go back to online tax calculators on the net and then input these values again in my excel sheet. Doing this every time seems like a waste of time and effort and what's worse is more often than not, these calculators are not up to date so some double-checking is needed. So, I decided to make my web app where the tax computations are already integrated and my actual take-home pay is computed with the consideration of all basic tax deductions.
 
 You can visit the finished web app here: https://salaraise.vercel.app/
 
 ## Requirements
 
-It's common sense to have the requirements ready before doing some work so I got that ready before anything else but considering that this is a project that I did on my free time, I didn't have the luxury be very detailed about it so I settled with just listing the functionalities I want this web app to initially have.
+It's common sense to have the requirements ready before doing some work so I got that ready before anything else but considering that this is a project that I did in my free time, I didn't have the luxury be very detailed about it so I settled with just listing the functionalities I want this web app to initially to have.
 
-- User should be able to calculate increase in net income after a gross increase
-  - User should be able to input his monthly salary and the increase percentage he wants
-  - User should see a table showing his current monthly gross salary, income tax, government deductions, and monthly net income.
-  - User should see a table showing his gross monthly salary, income tax, government deductions, and net after a gross increase.
+- User should be able to calculate an increase in net income after a gross increase
+  - The user should be able to input his monthly salary and the increasing percentage he wants
+  - The user should see a table showing his current monthly gross salary, income tax, government deductions, and monthly net income.
+  - The user should see a table showing his gross monthly salary, income tax, government deductions, and net after a gross increase.
   
-- User should be able to calculate his annual income.
-  - User should be able to input his monthly salary.
+- The user should be able to calculate his annual income.
+  - The user should be able to input his monthly salary.
   - User should see a table showing his annual gross salary, annual income tax, annual government deductions, and annual net income.
 
-With the requirements ready, it's time to do some digging about how the Philippine's government tax works.
+With the requirements ready, it's time to do some digging about how the Philippine government tax works.
 
 ## Research
 
@@ -44,13 +44,13 @@ Once I got that figured out, I know that it would be difficult to map the formul
   width={2000}
 />
 
-I won't be discussing how these are computed nor show their respective formulas here because I don't think I'll be able to present them in a way a casual reader would easily understand so I'll leave that to the expert. What I'll do isntead is leave some links after this article for your reference.
+I won't be discussing how these are computed nor show their respective formulas here because I don't think I'll be able to present them in a way a casual reader would easily understand so I'll leave that to the expert. What I'll do instead is leave some links after this article for your reference.
 
 Now that I got it mapped out, I think I'm ready to design my web app.
 
 ## Design
 
-I don't mind developing an app using low-fidelity mockups but I prefer if a high-fidelity mockup is available. This is so I can have a precise idea on the user interfaces that can be reused and how I can break down my components later in development. Although I was an Adobe XD user before, I decided to use Figma this time (and moving forward) to accomplish this mainly because of its cloud service which is free, this helps a lot because I usually switch between machines when working on projects.
+I don't mind developing an app using low-fidelity mockups but I prefer if a high-fidelity mockup is available. This is so I can have a precise idea of the user interfaces that can be reused and how I can break down my components later in development. Although I was an Adobe XD user before, I decided to use Figma this time (and moving forward) to accomplish this mainly because of its free cloud service, this helps a lot because I usually switch between machines when working on projects.
 
 <Image
   class="markdown-image"
@@ -59,15 +59,15 @@ I don't mind developing an app using low-fidelity mockups but I prefer if a high
   width={2000}
 />
 
-When it comes to designing my personal projects, I like to experiment so you might find the design eccentric. This is the only time I can do whatever I want when it comes to design so please understand.
+When it comes to designing my projects, I like to experiment so you might find the design eccentric. This is the only time I can do whatever I want when it comes to design so please understand.
 
 ## Development
 
-For this app I decided to use NextJS, Typescript and SASS. There actually is no technical reasons why I'll be using this, I just want to brush up my ReactJS and Typescript skills.
+For this app, I decided to use NextJS, Typescript, and SASS. There are no technical reasons why I'll be using this, I just want to brush up on my ReactJS and Typescript skills.
 
 ### Components
 
-My usual step after I got my local environment, configs, and folder structures setup is identify the components that I will be using and then develop them individually. For this project, I have identified the following:
+My usual step after I got my local environment, configs, and folder structures setup are identify the components that I will be using and then develop them individually. For this project, I have identified the following:
 
 - **`<Input />`** - An input component that can either be an amount or a percentage depending on its type property.
 - **`<SelectDropdown />`** - A dropdown component that accepts an `Array of Objects` for its options.
@@ -83,11 +83,11 @@ My usual step after I got my local environment, configs, and folder structures s
 
 ### Pages
 
-I don't plan to add irrelevant content here. Moving forward, additional functionalities will be accessed using the dropdown, hence this a single page web app.
+Because I don't plan to add irrelevant content to this article, moving forward, additional functionalities will be accessed using the dropdown, hence this is a single-page web app.
 
 ### Handling of computations
 
-Earlier, I have identified the basic salary deductions. These are the Income Tax and Government Taxes that are SSS, Philhealth, and PAG-IBIG. The computation for these changes occasionally. An example would be Philhealth which is currently at a premium rate of 4% at the moment but will increase to 4.5% on 2023. To accommodate this change in the future, I made sure to have separate methods for them instead of having a single method that computes for everything. This way, I can modify their respective method without affecting the other.
+Earlier, I identified the basic salary deductions. These are the Income Tax and Government Taxes that are SSS, Philhealth, and PAG-IBIG. The computation for these changes occasionally. An example would be Philhealth which is currently at a premium rate of 4% but will increase to 4.5% in 2023. To accommodate this change in the future, I made sure to have separate methods for them instead of having a single method that computes everything. This way, I can modify their respective method without affecting the other.
 
 ```js
 const computeSss = (value: number): number => {
@@ -107,7 +107,7 @@ const computeWithholdingTax = (value: number): number => {
 };
 ```
 
-Getting the computation spot on took a time of time because I needed to double check and compare the results in a more reliable computation (in my opinion) I made in the spreadsheet. Once I got everything checked, I created a method that uses these methods to finally compute for my take home pay or monthly net income.
+Getting the computation spot on took a time of time because I needed to double-check and compare the results in a more reliable computation (in my opinion) I made in the spreadsheet. Once I got everything checked, I created a method that uses these methods to finally compute my take home pay or monthly net income.
 
 ```js
 const netMonthly = computeNetIncome({
@@ -115,7 +115,7 @@ const netMonthly = computeNetIncome({
 });
 ```
 
-And then double checked everything and compare again until I got everything right. Now that I got my components and utility methods ready to use, I was ready to create my page layout and develop my calculator.
+And then double-checked everything and compare again until I got everything right. Now that I got my components and utility methods ready to use, I was ready to create my page layout and develop my calculator.
 
 ### Responsiveness
 
