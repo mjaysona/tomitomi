@@ -1,6 +1,7 @@
 {
   "extends": [
-    "plugin:astro/recommended"
+    "plugin:astro/recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "overrides": [
     {
@@ -15,25 +16,7 @@
         "extraFileExtensions": [".astro"]
       },
       "rules": {
-        "comma-dangle": [2, "always-multiline"],
-        "jsx-quotes": [2, "prefer-double"],
-        "quotes": [2, "single"],
-        "semi": 2,
-        "indent": [2, 2],
-        "prefer-destructuring": [2, {"object": true, "array": true}],
-        "max-len": [
-          "error",
-          {
-            "code": 80,
-            "ignoreUrls": true
-          }
-        ]
-      }
-    },
-    {
-      "files": ["*.ts", "*.js"],
-      "parser": "@typescript-eslint/parser",
-      "rules": {
+        "@typescript-eslint/no-empty-interface": 0,
         "comma-dangle": [2, "always-multiline"],
         "jsx-quotes": [2, "prefer-double"],
         "quotes": [2, "single"],

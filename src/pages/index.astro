@@ -4,12 +4,8 @@ import ArticleHead from '@/components/ArticleHead.astro';
 import ArticleItem from '@/components/ArticleItem.astro';
 import { Article } from '@/interfaces/articles';
 import PageWrapper from '@/layouts/PageWrapper.astro';
-import { Image } from '@astrojs/image/components';
 
 const articles = await Astro.glob<Article>('../articles/**/*.mdx');
-const featuredArticles = articles.filter(({ frontmatter: { featured } }) => (
-  featured
-));
 const recentArticles = articles.sort(
   (a, b) => new Date(b.frontmatter.pubDate).valueOf()
     - new Date(a.frontmatter.pubDate).valueOf(),

@@ -3,14 +3,21 @@ import { TagItem } from '@/interfaces/tag';
 
 export interface Props extends TagItem{
   tag: string | number,
-};
+}
 
 const { tag, size }:Props = Astro.props;
 
-const isNumber:number = !isNaN(tag);
+let isNumber = false;
+
+if (typeof tag === 'number') {
+  isNumber = true;
+}
 ---
 <a
-  href={isNumber || `/articles/tags/${tag.toLowerCase()}/`}
+  href={isNumber
+    ? ''
+    : `/articles/tags/${typeof tag === 'string' && tag.toLowerCase()}/`
+  }
   class={`tag ${size}`}
 >
   {isNumber && '+'}{tag}
