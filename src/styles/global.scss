@@ -38,7 +38,7 @@ a {
 }
 
 h1 {
-  font-size: 2.625rem;
+  font-size: 2.25rem;
   &:first-child {
     margin-top: 0;
   }
@@ -49,7 +49,7 @@ h2 {
 }
 
 h3 {
-  color: $gray-dark;
+  color: $gray-darker;
 }
 
 ul > li > ul {

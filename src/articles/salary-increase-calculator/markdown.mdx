@@ -1,11 +1,11 @@
 ---
 title: "Salary increase calculator"
 slug: "salary-increase-calculator"
+id: 001
 excerpt: "A simple web tool for Filipinos to easily compute how much do they get as take home after an increase in their gross salary."
 pubDate: "Jul 08 2022"
 featured: true
-tags: ["NextJS", "Typescript", "Sass", "ReactJS", "Figma"]
-path: "/articles/salary-increase-calculator"
+tags: ["Next.js", "Typescript", "Sass", "React", "Figma"]
 ---
 import { Image } from '@astrojs/image/components';
 
@@ -16,7 +16,7 @@ As a private employee living in the Philippines, I am contacted by recruiters fr
 
 You can visit the finished web app here: https://salaraise.vercel.app/
 
-## Requirements
+## What are we doing?
 
 It's common sense to have the requirements ready before doing some work so I got that ready before anything else but considering that this is a project that I did in my free time, I didn't have the luxury be very detailed about it so I settled with just listing the functionalities I want this web app to initially to have.
 
@@ -31,7 +31,7 @@ It's common sense to have the requirements ready before doing some work so I got
 
 With the requirements ready, it's time to do some digging about how the Philippine government tax works.
 
-## Research
+## Let's get to it!
 
 Computing the overall deductions was not as simple as I thought it would be, I realized that each government deductions (SSS, Philhealth, and PAG-IBIG) has their own tables that indicates the amount to be deducted based on an employee's salary range. I needed to dig those things up in several websites just to make sure that I'm using the updated computations. 
 
@@ -48,7 +48,7 @@ I won't be discussing how these are computed nor show their respective formulas 
 
 Now that I got it mapped out, I think I'm ready to design my web app.
 
-## Design
+## Guess I'd have to do my own design.
 
 I don't mind developing an app using low-fidelity mockups but I prefer if a high-fidelity mockup is available. This is so I can have a precise idea of the user interfaces that can be reused and how I can break down my components later in development. Although I was an Adobe XD user before, I decided to use Figma this time (and moving forward) to accomplish this mainly because of its free cloud service, this helps a lot because I usually switch between machines when working on projects.
 
@@ -61,11 +61,11 @@ I don't mind developing an app using low-fidelity mockups but I prefer if a high
 
 When it comes to designing my projects, I like to experiment so you might find the design eccentric. This is the only time I can do whatever I want when it comes to design so please understand.
 
-## Development
+## Now, code.
 
 For this app, I decided to use NextJS, Typescript, and SASS. There are no technical reasons why I'll be using this, I just want to brush up on my ReactJS and Typescript skills.
 
-### Components
+### Starting small with components.
 
 My usual step after I got my local environment, configs, and folder structures setup are identify the components that I will be using and then develop them individually. For this project, I have identified the following:
 
@@ -76,16 +76,16 @@ My usual step after I got my local environment, configs, and folder structures s
 
 <Image
   class="markdown-image"
-  alt="Salary Increase Calculator - components"
+  alt="Salary Increase Calculator - Components"
   src={import('./images/components.png')}
   width={2000}
 />
 
-### Pages
+### What about pages?
 
 Because I don't plan to add irrelevant content to this article, moving forward, additional functionalities will be accessed using the dropdown, hence this is a single-page web app.
 
-### Handling of computations
+### Stand alone methods.
 
 Earlier, I identified the basic salary deductions. These are the Income Tax and Government Taxes that are SSS, Philhealth, and PAG-IBIG. The computation for these changes occasionally. An example would be Philhealth which is currently at a premium rate of 4% but will increase to 4.5% in 2023. To accommodate this change in the future, I made sure to have separate methods for them instead of having a single method that computes everything. This way, I can modify their respective method without affecting the other.
 
@@ -107,7 +107,7 @@ const computeWithholdingTax = (value: number): number => {
 };
 ```
 
-Getting the computation spot on took a time of time because I needed to double-check and compare the results in a more reliable computation (in my opinion) I made in the spreadsheet. Once I got everything checked, I created a method that uses these methods to finally compute my take home pay or monthly net income.
+Getting the computation spot on took a bit of time because I needed to double-check and compare the results in a more reliable computation (in my opinion) I made in the spreadsheet. Once I got everything checked, I created a method that uses these methods to finally compute my take home pay or monthly net income.
 
 ```js
 const netMonthly = computeNetIncome({
@@ -117,12 +117,31 @@ const netMonthly = computeNetIncome({
 
 And then double-checked everything and compare again until I got everything right. Now that I got my components and utility methods ready to use, I was ready to create my page layout and develop my calculator.
 
-### Responsiveness
+### Must be responsive!
 
+Okay, I got my single-page web app ready and useable in large viewports (laptops and desktops), but what about mobile? We can't possibly ignore this, right? The majority of internet users use their mobile phones. To address that, I've gone through my app components' scoped CSS and added `media queries` to handle complex layout changes when the viewport changes.
 
+<Image
+  class="markdown-image"
+  alt="Salary Increase Calculator - Responsive App Preview"
+  src={import('./images/responsive-app-preview.png')}
+  width={2000}
+/>
 
-## Design revisions
+Would you look at that? Looks like we're ready to go.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
+### Let's put this up!
 
-## What I learned?
+I didn't really have a plan on having this in a paid domain. It's good that Next.js has first-class support from [Vercel](https://vercel.com/), so it's a no-brainer. I just needed to add my web app's Git repository to my Vercel account, and all the production build was done on their end. Sweet!
+
+## Getting some feedback and revisions.
+
+After I got this live on production, I shared this with my friends and colleagues to gather some feedback. If you go back up to the responsive section, you'll notice that it is different compared to the initial design I had near the start of this article. Yeah, it's because the screenshots I used were from the most updated one with the changes applied from the feedback I received and not from when I just finished coding. I wasn't able to screenshot those, sorry!
+
+Visit the finished product [here](https://salaraise.vercel.app/)!
+
+## Final note.
+
+Overall, I'm happy with how things turned out for several reasons. This project was a great introduction to Next.js and was an effective way to brush up on my React and Typescript skills which I haven't touched for years.
+
+## What's next?
