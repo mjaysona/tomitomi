@@ -63,7 +63,7 @@ const recentArticles = articles.sort(
       > div {
         padding-bottom:  min(2vw, 56px);;
         > div > div {
-          margin-bottom: min(4vw, 72px);
+          margin-bottom: min(2vw, 56px);
         }
       }
     }
@@ -81,6 +81,11 @@ const recentArticles = articles.sort(
     }
     .content {
       display: block;
+      .content__articles {
+        > div > div > div {
+          margin-bottom: min(4vw, 72px);
+        }
+      }
     }
   }
 </style>

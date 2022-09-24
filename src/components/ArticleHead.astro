@@ -31,13 +31,10 @@ const {
   <div class="content">
     <Content />
   </div>
-  <div class="article-toggle article-toggle--expanded">
+  <div class="article-toggle">
     <div class="article-toggle__toggle">
       <Icon
-        class={`
-          article-toggle__toggle__icon
-          article-toggle__toggle__icon--visible"
-        `}
+        class="article-toggle__toggle__icon"
         name="akar-icons:circle-chevron-down-fill"
       />
       <p class="article-toggle__toggle__icon">Collapse article</p>
@@ -74,15 +71,33 @@ const {
       height: 280px;
       overflow: hidden;
       &.content--visible {
+        padding-bottom: 80px;
         height: auto;
-        ~ .article-toggle {
+        &+ .article-toggle {
           background: none;
+          width: 100%;
+          height: auto;
+          bottom: 20px;
           .article-toggle__toggle {
             width: auto;
             height: auto;
             top: 0;
-          }
+            svg {
+              display: none;
+            }
+            p {
+              display: block;
+            }
+          } 
         }
+      }
+      &~ .article-toggle {
+        .article-toggle__toggle {
+          p {
+            display: none;
+            margin: 0;
+          }
+        } 
       }
     }
     .article-toggle {
@@ -115,12 +130,6 @@ const {
         position: relative;
         top: 20px;
       }
-      .article-toggle__toggle__icon {
-        display: none;
-        &.article-toggle__toggle__icon--visible {
-          display: block;
-        }
-      }
     }
   }
 </style>
@@ -128,21 +137,7 @@ const {
   document.querySelector('.article-toggle__toggle')
     .addEventListener('click', () => {
       const content = document.querySelector('.content');
-      const articleToggle = document.querySelector('.article-toggle');
-      const toggleTriggers = document.querySelectorAll(
-        '.article-toggle__toggle__icon'
-      );
-      const className = 'article-toggle__toggle__icon--visible';
       
       content.classList.toggle('content--visible');
-      articleToggle.classList.toggle('article-toggle--expanded');
-
-      toggleTriggers.forEach((element) => {
-        if (element.classList.contains(className)) {
-          element.classList.remove(className);
-        } else {
-          element.classList.add(className);
-        }
-      });
   });
 </script>
